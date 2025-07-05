@@ -173,15 +173,15 @@ coverage across all supported blockchains.
 
 Final output shows wallet addresses of interest all supported blockchains.
 
-  === SUMMARY REPORT ===
-  Total files scanned: 10
-  Total transactions processed: 126
-  Total wallet occurrences across all files: 123
-  Total unique wallets found: 28
+    === SUMMARY REPORT ===
+    Total files scanned: 10
+    Total transactions processed: 126
+    Total wallet occurrences across all files: 123
+    Total unique wallets found: 28
 
-  Top 20 wallets by occurrence:
-    0x2c978156fb72ff189a1fb3aa22bbfd8adb64e210: 53 occurrences across 4 files (53 transactions)
-    0xf2614a233c7c3e7f08b1f887ba133a13f1eb2c55: 8 occurrences across 2 files (8 transactions)
+    Top 20 wallets by occurrence:
+      0x2c978156fb72ff189a1fb3aa22bbfd8adb64e210: 53 occurrences across 4 files (53 transactions)
+      0xf2614a233c7c3e7f08b1f887ba133a13f1eb2c55: 8 occurrences across 2 files (8 transactions)
 
 ## Key features to be implemented:
 
