@@ -1,6 +1,6 @@
-# CRA-Compliant Crypto Tax Suite
+# Crypto Tax Suite
 
-This comprehensive suite processes cryptocurrency transactions from 12 major blockchains, extracts financial information from traditional institutions, and generates Canadian Revenue Agency (CRA)-compliant tax reports. It combines TON blockchain analysis via Anton with robust financial data extraction capabilities.
+This comprehensive suite aims to process cryptocurrency transactions from 12 major blockchains, extract financial information from traditional institutions, and generate crypto tax reports compliant with various jurisdictions worldwide.
 
 ## Key Features
 
@@ -18,7 +18,6 @@ This comprehensive suite processes cryptocurrency transactions from 12 major blo
 - Ruby 3.4.4
 - Bundler gem installed
 - CoinGecko API key (for FMV data)
-- Anton TON indexer (for TON blockchain data)
 
 ### Getting Started
 
@@ -30,12 +29,10 @@ This comprehensive suite processes cryptocurrency transactions from 12 major blo
     ```sh
     rvm 3.4.4@tonapi --create
     ```
-
 3. Install dependencies:
     ```sh
     bundle install
     ```
-
 4. Create necessary directories
     ```sh
     mkdir CSV_Files
@@ -43,7 +40,7 @@ This comprehensive suite processes cryptocurrency transactions from 12 major blo
 
 ### Workflow
 
-5. Gather all blockchain transactions for each wallet as csv and add chain name as prefix to file such as ```arbi_export-0xdEe1f25Cd66Db7cf4d7335A95A14324DFF91a588.csv``` in ```CSV_Files``` for Arbitrium for instance. To gather all transactions for TON blockchain wallets, run the script with your wallet addresses - The script will generate a CSV file for specified wallets on TON.
+5. Gather all blockchain transactions for each wallet as text dump (copy+paste) or csv and add chain name as prefix to file such as ```arbi_export-0xdEe1f25Cd66Db7cf4d7335A95A14324DFF91a588.csv``` in ```CSV_Files``` for Arbitrium for instance. To gather all transactions for TON blockchain wallets, run the script with your wallet addresses - A script will generate a CSV file for specified wallets on TON.
 
     ```sh
     ruby ton_transactions_explorer.rb
@@ -79,6 +76,11 @@ This comprehensive suite processes cryptocurrency transactions from 12 major blo
     ruby cra_cryptotax_generator.rb
     ```
 
+    (other modular scripts), run dump analysis
+    ```sh
+    ruby dump_scanner.rb
+    ```
+
 ## Key features implemented:
 
 ### 1. **Multi-chain support**:
@@ -94,7 +96,6 @@ This comprehensive suite processes cryptocurrency transactions from 12 major blo
 - Thread-safe parallel processing of multiple files
 
 3. **Enhanced CoinGecko API Integration**:
-Here's a more concise README update focusing on key functionality rather than implementation details:
 
 ### 3. **CoinGecko API Integration**
 
@@ -165,6 +166,22 @@ coverage across all supported blockchains.
     ETH: 125 rates | 4 missing dates
     TRX: 87 rates | 2 missing dates
 
+**Example usage:**
+  ```sh
+  $ ruby dump_scanner.rb
+  ```
+
+Final output shows wallet addresses of interest all supported blockchains.
+
+  === SUMMARY REPORT ===
+  Total files scanned: 10
+  Total transactions processed: 126
+  Total wallet occurrences across all files: 123
+  Total unique wallets found: 28
+
+  Top 20 wallets by occurrence:
+    0x2c978156fb72ff189a1fb3aa22bbfd8adb64e210: 53 occurrences across 4 files (53 transactions)
+    0xf2614a233c7c3e7f08b1f887ba133a13f1eb2c55: 8 occurrences across 2 files (8 transactions)
 
 ## Key features to be implemented:
 
