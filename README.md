@@ -37,23 +37,41 @@ This comprehensive suite aims to process cryptocurrency transactions from 12 maj
     ```sh
     mkdir CSV_Files
     ```
+5. get OCR installed
+    ```sh
+    sudo apt-get install tesseract-ocr
+    ```
+5. install imagemagick
+    ```sh
+    sudo apt update
+    sudo apt install imagemagick
+    ```
 
 ### Workflow
 
 5. Gather all blockchain transactions for each wallet as text dump (copy+paste) or csv and add chain name as prefix to file such as ```arbi_export-0xdEe1f25Cd66Db7cf4d7335A95A14324DFF91a588.csv``` in ```CSV_Files``` for Arbitrium for instance. To gather all transactions for TON blockchain wallets, run the script with your wallet addresses - A script will generate a CSV file for specified wallets on TON.
 
+    (Optional) perform keyword search for crypto related purchases from CC
     ```sh
-    ruby ton_transactions_explorer.rb
+    ruby financial_search.rb "amazon,walmart,crypto,investment"
+    ```
+
+    then format the CSV dumps with TON transactions
+    ```sh
+    ruby ton_formatter.rb
+    ```
+
+    then check yaml produced with right data
+    ```sh
+    ruby yaml_checker.rb
+    ```
+    ```sh
+    ruby yaml_counter.rb
     ```
 
     then get FMV for each transaction using CoinGecko API
     ```sh
     ruby historical_fmv_requester.rb
-    ```
-
-    (optional) search for financial institution records by keyword
-    ```sh
-    ruby financial_search.rb "amazon,walmart,crypto,investment"
     ```
 
     then check for missing FMV for each transaction (**optional**)

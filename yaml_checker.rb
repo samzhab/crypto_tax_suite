@@ -14,9 +14,15 @@ File.open('Processed/TON/Logs/ton_values_report.log', 'w') do |log|
 
     # Extract TON values from transactions with transaction numbering
     yaml[:transactions].each_with_index do |txn, index|
-      ton_value = txn[:details].find { |detail| detail.to_s.include?('TON') }
-      log.puts(":transaction_#{index + 1}: #{ton_value}") if ton_value
+      details = txn[:details]
+      if details.is_a?(Array)
+        ton_value = details.find { |detail| detail.to_s.include?('TON') }
+        log.puts(":transaction_#{index + 1}: #{ton_value}") if ton_value
+      else
+        log.puts(":transaction_#{index + 1}: no details array")
+      end
     end
+
     log.puts("\n")
   end
 end
