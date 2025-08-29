@@ -6,7 +6,7 @@ This comprehensive suite aims to process cryptocurrency transactions from 12 maj
 
 - **Multi-Chain Transaction Processing**: TON, ETH, SOL, and 9 other major blockchains
 - **Financial Data Extraction**: Powerful regex-based search across bank/credit card CSVs
-- **FMV Integration**: Uses historical exchange rates from CoinGecko API (30 calls/minute rate limit)
+- **FMV Integration**: Uses historical exchange rates from CoinGecko API (30 calls/minute rate limit) - Use https://api.coingecko.com/api/v3/coins/list to check list.
 - **CRA Compliance**: Generates tax reports meeting Canadian tax requirements
 - **Automated Workflow**: End-to-end processing from raw data to final reports
 - **Smart Caching**: Optimized API usage with local caching of exchange rates
