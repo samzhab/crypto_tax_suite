@@ -4,20 +4,84 @@ require 'fileutils'
 require 'date'
 
 class CsvToStandardYaml
+  # -----------------------------------------------------------------
+  #  HEADER_MAPPINGS – extended for the Tron CSV samples you provided
+  # -----------------------------------------------------------------
   HEADER_MAPPINGS = {
-    date: ['DateTime(UTC)', 'DateTime (UTC)', 'Human Time', 'Block Time'],
-    type: ['Method', 'Action', 'Type'],
-    sender: ['From', 'Sender'],
-    receiver: ['To', 'Receiver'],
-    amount: ['Value', 'Value_IN(ETH)', 'Value_OUT(ETH)', 'Value_IN(BNB)', 'Value_OUT(BNB)', 'Amount', 'TokenValue'],
-    token: ['Token', 'TokenSymbol', 'TokenName', 'ContractAddress'],
-    fees: ['TxnFee(ETH)', 'TxnFee(USD)', 'TxnFee(BNB)', 'Fee', 'Txn Fee'],
-    description: ['Method', 'Action', 'Status']
-  }
+    # Date / timestamp columns
+    date: [
+      'DateTime(UTC)',            # generic
+      'DateTime (UTC)',           # generic with space
+      'Human Time',               # generic
+      'Block Time',               # generic
+      'Time (UTC)',               # first CSV sample
+      'Time(UTC)'                 # second CSV sample (no space)
+    ],
+
+    # Transaction‑type / method columns
+    type: [
+      'Method',                   # generic
+      'Action',                   # generic
+      'Type',                     # generic
+      'Transaction Type',         # first CSV sample
+      'Method Name',              # first CSV sample
+      'Method ID'                 # first CSV sample (numeric identifier)
+    ],
+
+    # Sender address columns
+    sender: [
+      'From',                     # generic & both CSVs
+      'Sender'                    # generic fallback
+    ],
+
+    # Receiver address columns
+    receiver: [
+      'To',                       # generic & both CSVs
+      'Receiver'                  # generic fallback
+    ],
+
+    # Amount / token‑quantity columns
+    amount: [
+      'Value',                    # generic
+      'Value_IN(ETH)',            # generic
+      'Value_OUT(ETH)',           # generic
+      'Value_IN(BNB)',            # generic
+      'Value_OUT(BNB)',           # generic
+      'Amount',                   # generic & first CSV sample
+      'TokenValue',               # generic
+      'Amount/TokenID'            # second CSV sample (combined amount / NFT id)
+    ],
+
+    # Token identifier columns
+    token: [
+      'Token',                    # generic
+      'TokenSymbol',              # generic
+      'TokenName',                # generic
+      'ContractAddress',          # generic
+      'Token Symbol',             # first CSV sample (space)
+      'Token Symbol'              # second CSV sample (same spelling)
+    ],
+
+    # Fees – none of the supplied files contain explicit fee columns,
+    # but we keep the generic list in case other exports surface them.
+    fees: [
+      'TxnFee(ETH)', 'TxnFee(USD)', 'TxnFee(BNB)',
+      'Fee', 'Txn Fee'
+    ],
+
+    # Description / status columns
+    description: [
+      'Method',       # generic (sometimes used as a description)
+      'Action',       # generic
+      'Status',       # both CSVs
+      'Result'        # both CSVs (SUCCESS / FAIL)
+    ]
+  }.freeze
 
   CHAIN_NATIVE_TOKENS = {
     'ETH' => 'ETH',
     'BNB' => 'BNB',
+    'TRON' => 'TRX',
     'SOLANA' => 'SOLANA',
     'TON' => 'TON'
   }
